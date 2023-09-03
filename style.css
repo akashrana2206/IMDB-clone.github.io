@@ -1,0 +1,603 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+}
+
+:root{
+    --nav-backgroundColo: black;
+    --body-backgroundColor: rgb(44, 44, 44);
+    --input-bgc: rgb(51, 48, 48);
+    --font-color:#fff;
+    --btn-color:rgb(242, 73, 248);
+    --thumb-color : rgb(122, 199, 122);
+    --track-color : rgb(102, 52, 52);    
+}
+
+body{
+    background-color: var(--body-backgroundColor);
+}
+/* --------------------nav-bar------------------------- */
+nav .nav-container{
+    background-color: var(--nav-backgroundColo);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem;  
+}
+.input-conatiner{
+    width: 60%; 
+    display: flex;
+    flex-direction: row;
+}
+.nav-container input{
+    padding:0.5rem;
+    line-height: 0.5;
+    letter-spacing: 0.1rem;
+    background-color:var(--input-bgc) ;
+    border: none;
+    outline:none;
+    width:20rem;
+    text-align: center;
+    border-radius: 1rem;
+    color:var(--font-color);
+    font-size: 1rem;
+    font-weight: bold;    
+}
+.nav-container input::placeholder{
+    color:var(--font-color);
+    font-size: 1rem;
+    font-weight: bold;
+}
+.btn{
+    background-color: transparent;
+    padding:0.8rem;
+    letter-spacing: 0.1rem;
+    line-height: 0.5;
+    /* margin:0 1rem 0 1rem; */
+    border: none;
+    color: var(--font-color);
+    font-weight: bold;
+    cursor: pointer;
+}
+.fav-btn-wrapper {
+    display: inline-block;
+    position: relative;
+}
+#fav-count {
+    position: absolute;
+    top: -0.8rem;
+    right: 1%;
+    background-color:rgba(82, 43, 43,0.5); /* Adjust styling as needed */
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+#fav-lightBox{
+    width:40%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:none;
+}
+#fav-lightBox.active{
+    width:40%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+#fav-lightBox >span a{
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--font-color);
+    margin:1rem;
+}
+#fav-lightBox ul{
+    padding:1rem;
+}
+#fav-lightBox ul li{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin:1rem auto;
+    cursor: pointer;
+    color:var(--font-color);
+    transition: all 0.8s ease-in-out;
+}
+#fav-lightBox ul li:hover{
+    transform: translateX(-10px) translateY(-6px);
+    box-shadow: 2px 2px 6px 4px white;
+}
+#fav-lightBox ul li img{
+    height: 5rem;
+    width: 5rem;
+}
+.delete-button{
+    color:var(--font-color);
+    position:relative;
+    top:-0.4rem;
+}
+/* --------------------------------main movie List------------------------------------------------- */
+.movie-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem;
+}
+.box{
+    height: 12rem;
+    width:10rem;
+    background-color:inherit;
+    border:none;
+    outline:none;
+    border-radius: 1rem;
+    margin: 3rem;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+.box img{
+    width:inherit;
+    height:inherit;
+    border-radius: 1rem 1rem 0 0 ;
+    /* transition: all 1s ease-in-out; */
+}
+.box:hover{
+    transform: scale(1.1);
+}
+.box .movie-btn{
+    display: flex;
+    width:100%;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(25, 32, 32, 0.5);
+    padding:0.8rem; 
+    color:var(--font-color);
+    border:none;
+    outline:none;
+    border-radius: 0 0 1rem 1rem ;
+    position: relative;
+    top:-2%;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+/* ---------------scrollbar- -------------------*/
+::-webkit-scrollbar{
+    width: 5px;
+}
+/* ::-webkit-scrollbar-track{
+    background-color: rgb(185, 185, 235);
+    border-radius: 5px;
+} */
+::-webkit-scrollbar-thumb{
+    width:5px;
+    background: linear-gradient(40deg,blue,purple);
+    border-radius: 5px;
+}
+/* ------------------------movie detail ---------------------------------------- */
+#detail-lightBox{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    /* right:0%; */
+    z-index: 1000;
+    display:none;
+    transition: all 1s ease-in-out;
+    animation: dropDown 0.2s ease-in-out;
+}
+#detail-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgb(0,0,0);
+    position:fixed;
+    top:0%;
+    /* right:0%; */
+    z-index: 1000;
+    display:block;
+}
+#detail-lightBox >span a{
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--font-color);
+    margin:1rem;
+}
+.detail-nav-container{
+    background-color: var(--nav-backgroundColo);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem;  
+}
+.detail-nav-container a{
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color:var(--font-color);
+}
+
+.movieDetails{
+    width:60rem;
+    height:30rem;
+    /* border: 1px solid white; */
+    margin: 2rem auto;
+    padding:1rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+@keyframes dropDown {
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0 );
+    }
+}
+.img-container{
+    width:30%;
+    height:70%;
+    /* border: 1px solid yellow; */
+}
+.img-container img{
+    width:100%;
+    height:100%;
+}
+.title-container{
+    width:70%;
+    height:auto;
+    /* border: 1px solid orange; */
+    padding: 1rem;
+}
+h2,p{
+    text-align: start;
+    color: var(--font-color);
+    margin-bottom: 0.5rem;
+}
+p{
+    font-size: 0.9rem;
+}
+h2 > span,
+p > span{
+    margin-left:1rem;
+}
+.plot{
+    margin-top:1rem;
+}
+.plot p{
+    font-size: 1rem;
+    text-align: justify;
+}
+.add-fav-btn {
+    width:100%;
+    background-color: var(--btn-color);
+    padding:0.8rem;
+    letter-spacing: 0.1rem;
+    line-height: 0.5;
+    /* margin:0 1rem 0 1rem; */
+    border: none;
+    color: var(--font-color);
+    font-weight: bold;
+    cursor: pointer;
+}
+/* span{
+    margin-bottom: 2rem;;
+} */
+/*----------------------------- media query-------------------------------- */
+
+
+@media screen and  (max-width:1000px){
+    .input-conatiner{
+        width: 40%; 
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-container input{
+        width: 10rem;
+    }
+    .nav-container input::placeholder{
+        font-size: 0.7rem   ;
+    }
+    .btn{
+        font-size: 0.7rem;
+    }
+    /* #detail-lightBox{
+        max-width:1000px;
+    }
+    .movieDetails{
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        font-size: 0.6rem;
+    }
+    .title-container p>span{
+        display: flex;
+        flex-wrap: wrap ;
+        align-items: flex-start ;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+    .movieDetails::-webkit-scrollbar{
+        width:5px;
+    }
+    .movieDetails::-webkit-scrollbar-thumb{
+        background-color: red;
+
+    }
+    .img-container{
+        margin-bottom: 2rem;
+    }*/
+   .plot{
+    width:70%;
+   } 
+   #fav-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+}
+@media screen and  (max-width:800px){
+    .input-conatiner{
+        width: 40%; 
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-container input{
+        width: 10rem;
+    }
+    .nav-container input::placeholder{
+        font-size: 0.7rem   ;
+    }
+    .btn{
+        font-size: 0.7rem;
+    }
+    /* #detail-lightBox{
+        max-width:500px;
+    } */
+    .movieDetails{
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        font-size: 0.8rem;
+    }
+    /* .title-container p>span{
+        display: flex;
+        flex-wrap: wrap ;
+        align-items: flex-start ;
+        margin-top: 1rem;
+        margin-left: 0;
+    } */
+    /* #detail-lightBox::-webkit-scrollbar{
+        width:20px;
+    }
+    #detail-lightBox::-webkit-scrollbar-thumb{
+        background-color: red;
+
+    } */
+    .img-container{
+        margin-bottom: 2rem;
+    }
+   .plot{
+    width:90%;
+   }
+   #fav-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+}
+
+
+@media screen and  (max-width:700px){
+    .input-conatiner{
+        width:20%; 
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-container input{
+        width: 8rem;
+        margin-left: 0.5rem;
+    }
+    .nav-container input::placeholder{
+        font-size: 0.7rem   ;
+    }
+    .btn{
+        font-size: 0.7rem;
+    }
+    /* #detail-lightBox{
+        max-width:600px;
+    } */
+    .movieDetails{
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        font-size: 0.6rem;
+    }
+    .title-container p>span{
+        display: flex;
+        flex-wrap: wrap ;
+        align-items: flex-start ;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+    .movieDetails::-webkit-scrollbar{
+        width:5px;
+    }
+    .movieDetails::-webkit-scrollbar-thumb{
+        background-color: red;
+
+    }
+    .img-container{
+        margin-bottom: 2rem;
+    }
+   .plot{
+    width:60%;
+   }
+   #fav-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+}
+@media screen and  (max-width:450px){
+    .input-conatiner{
+        width:20%; 
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-container input{
+        width: 8rem;
+        margin-left: 0.5rem;
+    }
+    .nav-container input::placeholder{
+        font-size: 0.7rem   ;
+    }
+    .btn{
+        font-size: 0.7rem;
+    }
+    #detail-lightBox{
+        max-width:450px;
+    }
+    .movieDetails{
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        font-size: 0.5 rem;
+    }
+    
+    .title-container{
+        width: 70%;
+        font-size: 0.8rem;
+    }
+    .title-container p{
+        font-size: 0.7rem;
+    }
+    .title-container p>span{
+        display: flex;
+        flex-wrap: wrap ;
+        align-items: flex-start ;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+    .details-box::-webkit-scrollbar{
+        width:5px;
+    }
+    .details-box::-webkit-scrollbar-thumb{
+        background-color: red;
+
+    }
+    .img-container{
+        margin-bottom: 2rem;
+    }
+   .plot{
+    width:40%;
+   }
+   #fav-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+}
+@media screen and  (max-width:450px){
+    .input-conatiner{
+        width:20%; 
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-container input{
+        width: 8rem;
+        margin-left: 0.5rem;
+    }
+    .nav-container input::placeholder{
+        font-size: 0.7rem   ;
+    }
+    .btn{
+        font-size: 0.7rem;
+    }
+    #detail-lightBox{
+        max-width:450px;
+    }
+    .movieDetails{
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 0.5 rem;
+    }
+    
+    .title-container{
+        width: 70%;
+        font-size: 0.8rem;
+        overflow: scroll;
+        height: 10rem;
+    }
+    .title-container p{
+        font-size: 0.9rem;
+        max-width: 340px;
+    }
+    .title-container p>span{
+        display: flex;
+        flex-wrap: wrap ;
+        align-items: flex-start ;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+    .title-container::-webkit-scrollbar{
+        width:5px;
+    }
+    .title-container::-webkit-scrollbar-thumb{
+        background-color: red;
+        width:5px;
+
+    }
+    .img-container{
+        margin-bottom: 2rem;
+    }
+   .plot{
+    width:40%;
+   }
+   #fav-lightBox.active{
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.8);
+    position:fixed;
+    top:0%;
+    right:0%;
+    z-index: 1000;
+    display:block;
+}
+}
